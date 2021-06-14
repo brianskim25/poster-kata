@@ -1,0 +1,46 @@
+IBMCodeChallenge - Brian Kim
+
+Issues/Challenges
+1. Installing/Setting-Up software&repository
+	*Travis-CI
+	*PostgreSQL
+	*GitHub
+	*Docker (Desktop)
+		-virtualization issue
+			#RESOLVED: Enabled virtualization from BIOS and Windows features
+		-WSL2 kernel update not installed issue
+			#RESOLVED: Installed the Linux kernel update package from 
+			https://docs.microsoft.com/en-us/windows/wsl/install-win10#step-4---download-the-linux-kernel-update-package.
+	*MySQL
+	*VS Code
+
+2. Docker containers
+	*Setting up and building Docker containers for each database and application
+		-Setting up the Dockerfile
+			#Creating working directory
+			#Copying python script files to be accessed in the container
+			#Installing python packages so that the python script files have access to them in the containers
+		-Setting up the Docker-Compose file
+			#Creating all three containers for salesdb database, dw database, and python application
+			#Port mappings for the database connections
+			#Ensuring python application depends on the database containers running
+			#Ensuring python application container remains running after being built
+		-Running cmd commands to build Docker images
+		-Running cmd commands to create and run the Docker containers
+		
+3. Python script files in Docker containers
+	*Testing and verifying the python scripts can access database containers
+		-Running cmd commands (docker exec) to run the python script files
+			#Originally used PowerShell but had issues with syntax (RESOLVED: used cmd instead)
+		-Within the python scripts, application has to be able to connect to/access the MySQL database containers
+			#Eventually figured out that "host" names had to be the service name used from the docker-compose.yml file
+			#Authentication plugin (used mysql_native_password, this is not the default)
+
+4. Python application to connect to API and write to databases
+	*Installing and using helper libraries
+		-Saw the Documentation page and found python package for swapi to help with the application
+	*Logic to retrieve data from API, transform the data, and store as variable in python application
+	*Logic to loop through a list of objects to obtain all necessary data
+	*Logic to insert the data into the databases by using the stored variables
+	*Logic to use value from one poster type to obtain value(s) of another poster type
+		-Using starships to obtain respective film titles and release date 
