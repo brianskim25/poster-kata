@@ -1,0 +1,53 @@
+Data Developer Code Challenge Overview&Approach
+
+1.Create the database "salesdb"
+	--Use Docker and MySQL to create the customer database called "salesdb"
+	--Create a table within salesdb (call it "Sales")
+	--Add the following columns
+		*sales_id (INT)
+		*poster_content (VARCHAR(100))
+		*quantity (INT)
+		*price DECIMAL(2,1)
+		*email (VARCHAR(100))
+		*sales_rep (VARCHAR(100))
+		*promo_code VARCHAR(50)
+		*poster_type VARCHAR(50)
+		*poster_number INT
+
+2. Create the database "dw"
+	--Use Docker and MySQL to create the merged database called "dw"
+	--Create a table within dw (call it "Starship_Film")
+	--Add the following columns
+		*starship_film_id (INT)
+		*poster_content (VARCHAR(100))
+		*film_appeared (VARCHAR(100))
+		*film_made DATE
+
+3. Develop a data pull/scraping program (language of choice: Python)
+	--Use Docker to containerize the Python application
+	--Use and connect to swapi api
+	--Install/Use the swapi library
+		*fork and make any necessary changes to ensure the package runs correctly with the Python application
+	--Retrieve/insert data for salesdb.Sales table
+		*ensure the data is populated completely and correctly
+	--Retrieve/insert data for dw.Starship_Film table
+		*ensure the data is populated completely and correctly
+		*prepare a simple query to show a summary of starship and film data
+			~ SELECT poster_content, film_appeared, film_made FROM dw.Starship_Film ORDER BY film_made ASC, poster_content DESC;
+	
+4. Upload code to GitHub
+	##did not get to this step and was not able to fully integrate the project from github to Travis-CI
+	--Create settings for the .travis.yml file
+	--Create a repository called poster-kata
+	--Upload all files to the ...brianskim25/poster-kata repository
+		*Dockerfile
+		*Docker-Compose file (yml)
+		*SQL script files
+		*Python script files
+		*cmd commands used
+
+##did not get to this step and was not able to fully integrate the project from github to Travis-CI
+##(I ran and tested the project mostly using individual scripts or cmd commands
+5. Build, Run, and Test from Travis-CI
+	--Can be used for unit testing
+	--Ultimately, used for demonstrating the full product from the code challenge
