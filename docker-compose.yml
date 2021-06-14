@@ -1,0 +1,42 @@
+#creating a docker-compose.yml file
+version: '3.8'
+services:
+    #db container for the salesdb mysql database
+    db:
+        image: mysql:latest
+        container_name: mysqlDB
+        environment:
+            MYSQL_ROOT_PASSWORD: mySQLroot!@
+            MYSQL_USER: user
+            MYSQL_PASSWORD: mySQLuser!@
+            MYSQL_DATABASE: salesdb
+        volumes:
+            - ./mysqldata:/var/lib/mysql
+        ports:
+            - '3307:3306'
+    #db container for the dw mysql database
+    db2:
+        image: mysql:latest
+        container_name: mysqlDB2
+        environment:
+            MYSQL_ROOT_PASSWORD: mySQLroot!@
+            MYSQL_USER: user
+            MYSQL_PASSWORD: mySQLuser!@
+            MYSQL_DATABASE: dw
+        volumes:
+            - ./mysqldata2:/var/lib/mysql
+        ports:
+            - '3308:3306'
+    
+    #python application container        
+    pythonapp:
+        #use the Dockerfile to build the image
+        build: ./
+        image: pythonapp
+        container_name: pythonAPP
+        #must have db and db2 running
+        depends_on: 
+            - db
+            - db2
+        stdin_open: true
+        tty: true

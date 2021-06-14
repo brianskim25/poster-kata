@@ -1,0 +1,37 @@
+##cmd commands used through the code challenge
+
+##run the sql script file salesdb_SalesTable.sql
+##must run after running docker-compose build --no-cache and docker-compose up -d
+##(ensure the salesdb.Sales table is dropped prior to running
+##because it may exist from a previous run of the sql script or the python application)
+	docker exec -i mysqlDB mysql -uroot -pmySQLroot!@ salesdb < salesdb_SalesTable.sql
+
+##run the sql script file dw_Starship_FilmTable.sql
+##must run after running docker-compose build --no-cache and docker-compose up -d
+##(ensure the dw.Starship_Film table is dropped prior to running
+##because it may exist from a previous run of the sql script or the python application)
+	docker exec -i mysqlDB2 mysql -uroot -pmySQLroot!@ dw < dw_Starship_FilmTable.sql
+
+
+##run the python script file APIsalesdb.py
+##must run after running docker-compose build --no-cache and docker-compose up -d
+##(ensure the salesdb.Sales table is truncated prior to running
+##because data may exist from a previous run of the python application)
+	docker exec -it pythonAPP python APIsalesdb.py
+
+##run the python script file APIdw.py
+##must run after running docker-compose build --no-cache and docker-compose up -d
+##(ensure the dw.Starship_Film table is truncated prior to running
+##because data may exist from a previous run of the python application)
+	docker exec -it pythonAPP python APIdw.py
+
+
+
+#used when retesting the full containerization, sql scripts, and python scripts/application
+	docker-compose down
+
+#(re)building for a fresh python image with updated python script files and logic to not keep cache
+	docker-compose build --no-cache
+
+#(re)running the docker-compose file in the detached mode for less logs
+	docker-compose up -d
